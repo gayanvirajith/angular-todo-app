@@ -23,7 +23,8 @@
         <input type="checkbox" ng-model="todo.done"/>
         </label>
         <input type="text" ng-model="todo.name" class="form-control input-sm"/>        
-        <a href class="btn btn-sm btn-default" ng-click="todoCtrl.moveTo($index)"><i class="glyphicon glyphicon-chevron-down"></i></span></a>
+        <a href class="btn btn-sm btn-default" ng-click="todoCtrl.moveTo($index, 'down')"><i class="glyphicon glyphicon-chevron-down"></i></span></a>
+        <a href class="btn btn-sm btn-default" ng-click="todoCtrl.moveTo($index, 'up')"><i class="glyphicon glyphicon-chevron-up"></i></span></a>
         <a href class="btn btn-sm btn-default" ng-click="todoCtrl.removeTodo($index)"><i class="glyphicon glyphicon-trash"></i></span></a>
       </div>
     </div>

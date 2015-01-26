@@ -28,12 +28,21 @@
     };
 
     // Function to move item from a position to another
-    this.moveTo = function(index) {
+    this.moveTo = function(index, direction) {
       
-      if (index === this.todos.length - 1) {
-        return;
+      // Move up
+      if (direction === 'up') {
+        if (index === 0) return;
+        index = index - 1;
       }
 
+      // Move down
+      if (direction === 'down') {
+        if (index === this.todos.length - 1) {
+          return;
+        }  
+      }
+      
       var todo = this.todos[index];
       this.todos.splice(index + 2, 0, todo); // Move to a new position 
       this.todos.splice(index, 1);// Delete old position item
