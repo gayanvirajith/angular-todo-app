@@ -1,5 +1,5 @@
 (function(){
 
-  var app = angular.module('appControllers', ['']);
+  var app = angular.module('appControllers', []);
   
 })();
