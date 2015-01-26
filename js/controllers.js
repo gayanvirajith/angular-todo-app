@@ -2,33 +2,38 @@
 
   var app = angular.module('appControllers', []);
   
-  app.controller('TodoController', function(){
+  app.controller('TodoController',['$firebase', '$scope', function($firebase, $scope){
     
     // Initialize list of todos  
-    this.todos = [
-      { name: "Todo item 1", done: false },
-      { name: "Todo item 2", done: false },
-    ];
+    $scope.todos = [];
+    var ref = new Firebase("https://gayan-todo.firebaseio.com/web/data/todos");
+    var sync = $firebase(ref);
+    // download the data into a local object
+    $scope.todos = sync.$asArray();
+
+    object = this;
+    object.ref = sync.$ref();
 
     // Function to add todo item
-    this.addTodo = function() {
+    $scope.addTodo = function() {
 
       var newTodo = {
-        name: this.todoText,
+        name: $scope.todoText,
         done: false
       };
 
-      this.todos.push(newTodo);
-      this.todoText = '';
+      $scope.todos.$add(newTodo);
+      $scope.todoText = '';
     };
 
     // Function to delete todo item
-    this.removeTodo = function(index) {
-      this.todos.splice(index, 1);
+    $scope.removeTodo = function(index) {
+      item = $scope.todos.$getRecord($scope.todos.$keyAt(index));
+      $scope.todos.$remove(item);
     };
 
     // Function to move item from a position to another
-    this.moveTo = function(index, direction) {
+    $scope.moveTo = function(index, direction) {
       
       // Move up
       if (direction === 'up') {
@@ -38,16 +43,18 @@
 
       // Move down
       if (direction === 'down') {
-        if (index === this.todos.length - 1) {
+        if (index === $scope.todos.length - 1) {
           return;
         }  
       }
       
-      var todo = this.todos[index];
-      this.todos.splice(index + 2, 0, todo); // Move to a new position 
-      this.todos.splice(index, 1);// Delete old position item
+      var todo = $scope.todos[index];
+      $scope.todos.splice(index + 2, 0, todo); // Move to a new position 
+      $scope.todos.splice(index, 1);// Delete old position item
+    
     }; 
 
-  });
+
+  }]);
 
 })();

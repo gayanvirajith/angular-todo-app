@@ -1,5 +1,8 @@
 (function(){
   
-  var app = angular.module('TodoApp', ['appControllers']);
+  var app = angular.module('TodoApp', [
+    'appControllers',
+    'firebase'
+  ]);
 
 })();

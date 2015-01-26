@@ -17,26 +17,36 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-  <div class="container" ng-controller="TodoController as todoCtrl">
+  <div class="container" ng-controller="TodoController">
     <h4 class="list-group-item">Todo List</h4>
     
     <!-- List of todos -->
-    <div class="list-group-item" ng-repeat="todo in todoCtrl.todos">
+    <div class="list-group-item" ng-repeat="todo in todos">
       <div class="form-inline">
         <label class="checkbox" >
         <input type="checkbox" ng-model="todo.done"/>
         </label>
-        <input type="text" ng-model="todo.name" class="form-control input-sm"/>        
-        <a href class="btn btn-sm btn-default" ng-click="todoCtrl.moveTo($index, 'down')"><i class="glyphicon glyphicon-chevron-down"></i></span></a>
-        <a href class="btn btn-sm btn-default" ng-click="todoCtrl.moveTo($index, 'up')"><i class="glyphicon glyphicon-chevron-up"></i></span></a>
-        <a href class="btn btn-sm btn-default" ng-click="todoCtrl.removeTodo($index)"><i class="glyphicon glyphicon-trash"></i></span></a>
+        <input type="text" ng-model="todo.name" class="form-control input-sm todo"/>        
+        <a href class="btn btn-sm btn-default" ng-click="moveTo($index, 'down')"><i class="glyphicon glyphicon-chevron-down"></i></span></a>
+        <a href class="btn btn-sm btn-default" ng-click="moveTo($index, 'up')"><i class="glyphicon glyphicon-chevron-up"></i></span></a>
+        <a href class="btn btn-sm btn-default" ng-click="removeTodo(todos.indexOf(todo))"><i class="glyphicon glyphicon-trash"></i></span></a>
+      </div>
+    </div>
+
+    <!-- Preview panel -->
+    <div class="list-group-item" ng-show="todoText">
+      <div class="form-inline">
+         <label class="checkbox" >
+        <input type="checkbox" ng-model="todo.done" disabled/>
+        </label>
+        <input type="text" ng-model="todo.name" class="form-control input-sm todo" placeholder="{{todoText}}" /> 
       </div>
     </div>
 
     <!-- Add todo form -->
     <div class="list-group-item">
-      <form class="form-inline" ng-submit="todoCtrl.addTodo()">
-        <input type="text" ng-model="todoCtrl.todoText" class="form-control input-sm" autofocus/>
+      <form class="form-inline" ng-submit="addTodo()">
+        <input type="text" ng-model="todoText" class="form-control input-sm" autofocus/>
         <input type="submit" value="Add" class="btn btn-sm btn-primary"/>       
       </form>
     </div>
