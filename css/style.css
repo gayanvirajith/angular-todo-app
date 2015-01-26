@@ -1,3 +1,9 @@
 .container {
   width: 375px;
 }
+
+.todo, .todo:focus {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+}
