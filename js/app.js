@@ -1,5 +1,5 @@
 (function(){
   
-  var app = angular.module('ArtistDirectory', ['appControllers']);
+  var app = angular.module('TodoApp', ['appControllers']);
 
 })();
